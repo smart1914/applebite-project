@@ -1,9 +1,14 @@
 FROM devopsedu/webapp
 
-# Delete the default Apache index file so your PHP code takes over
-RUN rm -f /var/www/html/index.html
+# 1. Clean out the default placeholder web directory
+RUN rm -rf /var/www/html/*
 
-COPY . /var/www/html/
+# 2. Install Git and clone Edureka's official website repo files straight inside
+RUN apt-get update && apt-get install -y git && \
+    git clone https://github.com/edureka-devops/projCert.git /tmp/edureka-code && \
+    cp -r /tmp/edureka-code/proj/* /var/www/html/ && \
+    rm -rf /tmp/edureka-code
+
 EXPOSE 80
 
 CMD ["apachectl", "-D", "FOREGROUND"]
