@@ -32,6 +32,7 @@ This project demonstrates a production-grade DevOps workflow separating architec
 
 ## 🐳 Docker Configuration (`Dockerfile`)
 The deployment utilizes a hardened base image optimized to eliminate zombie terminal processes and directory pathing deadlocks:
+
 ```dockerfile
 FROM devopsedu/webapp
 RUN rm -rf /var/www/html/*
